@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "angular-keycloak-demo": {
+      "hosting": {
+        "ng-keycloak-demo": [
+          "angular-keycloak-demo"
+        ]
+      }
+    }
+  }
+}

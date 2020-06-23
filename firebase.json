@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "ng-keycloak-demo",
+      "public": "dist/ng-keycloak-demo",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+<div class="my-3">
+  <button mat-raised-button color="primary" (click)="fetchUserDetails()">Get user details</button>
+  <ng-container *ngIf="userDetails">
+    <h3>User details:</h3>
+    <pre>{{userDetails | json}}</pre>
+  </ng-container>
+</div>
+
+<div class="my-3">
+  <button mat-raised-button color="primary" (click)="fetchToken()">Get token</button>
+  <ng-container *ngIf="token">
+    <h3>Token:</h3>
+    <div class="text-break">{{token}}</div>
+  </ng-container>
+</div>
