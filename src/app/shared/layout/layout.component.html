@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+  <a mat-button routerLink="/" class="mr-2">GTC Keycloak demo</a>
+  <span class="flex-grow-1"></span>
+  <button mat-button (click)="logout.emit()">Logout</button>
+</mat-toolbar>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 offset-lg-2 offset-md-1">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

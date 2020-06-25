@@ -1,40 +1,42 @@
-import { BrowserModule } from '@angular/platform-browser'
-import { NgModule } from '@angular/core'
-
-import { AppRoutingModule } from './app-routing.module'
-import { AppComponent } from './app.component'
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { MatFormFieldModule } from '@angular/material/form-field'
-import { MatInputModule } from '@angular/material/input'
-import { MatToolbarModule } from '@angular/material/toolbar'
-import { MatButtonModule } from '@angular/material/button'
-import { KeycloakAngularModule } from 'keycloak-angular';
-import {ReactiveFormsModule} from '@angular/forms';
-import { RestrictedComponent } from './restricted/restricted.component';
-import { ConfigFormComponent } from './config-form/config-form.component';
-import { RestComponent } from './rest/rest.component';
-import {HttpClientModule} from '@angular/common/http';
+import {BrowserModule} from '@angular/platform-browser';
+import {ApplicationRef, DoBootstrap, NgModule} from '@angular/core';
+import {AppComponent} from './app.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {KeycloakService} from './auth/keycloak.service';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {RouterModule} from '@angular/router';
+import {KeycloakBearerInterceptor} from './keycloak-bearer.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RestrictedComponent,
-    ConfigFormComponent,
-    RestComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatToolbarModule,
-    MatButtonModule,
     HttpClientModule,
-    KeycloakAngularModule,
-    ReactiveFormsModule,
+    RouterModule.forRoot([
+      {
+        path: 'switch-account',
+        loadChildren: () => import('./switch-account/switch-account.module').then(
+          m => m.SwitchAccountModule),
+      },
+    ]),
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: KeycloakBearerInterceptor,
+      multi: true
+    }
+  ]
 })
-export class AppModule {}
+export class AppModule implements DoBootstrap {
+  constructor(private keycloak: KeycloakService) {}
+
+  ngDoBootstrap(appRef: ApplicationRef) {
+    // deal with authentication ASAP
+    // no reason in bootstrapping the app if the user is not authenticated
+    this.keycloak.init().then(() => appRef.bootstrap(AppComponent));
+  }
+}

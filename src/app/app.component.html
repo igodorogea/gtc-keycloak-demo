@@ -1,15 +1,4 @@
-<mat-toolbar color="primary">
-  <a mat-button routerLink="/" class="mr-2">GTC Keycloak demo</a>
-  <a mat-button routerLink="/config">Config</a>
-  <a mat-button routerLink="/restricted">Restricted</a>
-  <a mat-button routerLink="/rest">Rest</a>
-  <span class="flex-grow-1"></span>
-  <button mat-button (click)="logout()">Logout</button>
-</mat-toolbar>
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8 col-md-10 offset-lg-2 offset-md-1">
-      <router-outlet></router-outlet>
-    </div>
-  </div>
-</div>
+<pre>
+  {{accountSettings | json}}
+</pre>
+<router-outlet></router-outlet>

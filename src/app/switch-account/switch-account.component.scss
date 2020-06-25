@@ -1,0 +1,24 @@
+.overlay-container {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, .32);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay {
+  pointer-events: auto;
+  display: block;
+  padding: 10px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  overflow: auto;
+  box-shadow: 0 11px 15px -7px rgba(0, 0, 0, .2), 0 24px 38px 3px rgba(0, 0, 0, .14), 0 9px 46px 8px rgba(0, 0, 0, .12);
+  background: #fff;
+}

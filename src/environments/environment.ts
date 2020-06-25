@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  keycloak: {
+    url: 'http://localhost:8080/auth',
+    realm: 'gtc_realm',
+    clientId: 'gtc_fe_client'
+  },
+  api: {
+    account: '/api/account-settings',
+    switchAccount: '/api/switch-account'
+  }
 };
 
 /*

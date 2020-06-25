@@ -1,0 +1,12 @@
+<ng-container *ngIf="accountSettings$ | async as accountSettings">
+  <div class="overlay-container">
+    <div class="overlay">
+      <mat-nav-list>
+        <ng-container *ngFor="let account of accountSettings.availableAccounts; last as isLast">
+          <mat-list-item (click)="switchAccount(account)">{{account.coName}}</mat-list-item>
+          <mat-divider *ngIf="!isLast"></mat-divider>
+        </ng-container>
+      </mat-nav-list>
+    </div>
+  </div>
+</ng-container>
